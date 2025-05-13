@@ -2,6 +2,7 @@
 
 **Authors**: Nolan Henze, Sophie Merone, Nathan Oelsner, and Eric Pfaffenbach  
 **Date**: 12/12/2024
+**Disclaimer**: Some of the code was made using CHATGPT, however, we also wrote a majority of the code.
 
 ## Introduction
 
@@ -41,18 +42,17 @@ For data preparation for the DMARC survey, we turned different demographics such
 
 Once we had created these binary variables, we needed to aggregate the individual data to the household level. This was done by grouping each household together and then taking the sum of all demographic attributes to determine how many of each category were in the household. For example, if 4 individuals had a 1 in the value for **CHILDREN**, then the household demographic would show 4 elderly individuals.
 
-Since CPS data is our cleaned data, it holds the target variable (Y). For cleaning the Y variables, we use 1 to denote the existence of food insecurity. For example, **FSFOODS**, which is the food variety and the amount of food indicator, is marked as 1 if they don't have enough food or enough variety of food. These variables are the same for the entire household, so we only need to take the first entry.
-
-At the start of each analysis script, we would choose the Y variable we were predicting and remove the others. Following that, we would remove observations with missing Y data, as we wouldn't be able to test the accuracy. Then, we would split our data into 70% for training and 30% for testing our model. Since we are using lasso and ridge regression, we would need to turn our data frames into matrices.
-
 ## Repository Structure
 
 The repository contains the following key sections:
 
 - **scr**: Scripts for data analysis and model development.
-    - **clean_data_code**
-- **data**: The datasets (CPS and ACS).
-- **outputs**: Visualizations and outputs of the analysis. Will also include an example of a code output with interpretations.
+    - **clean_data_code**: The scripts for cleaning the data.
+    - **models**: The models that were created to analyze the data.
+    - visualization_code**: The scripts to show different aspects of the data visually.
+- **data**: The original datasets and new aggregated datasets.
+    - **raw_data**: The ordiginal data givent to us.
+- **outputs**: A few of the visualizations we ended up make.
 
 ## Requirements
 
@@ -100,19 +100,13 @@ The model is trained using the CPS data and tested for accuracy. For each outcom
 
 To reproduce the results:
 
-1. Download the CPS and ACS data from the provided links.
+1. Download the data and place it into the `data/raw_data/` folder.
 2. Download the files into the `src/` directory.
 3. Install the required packages by running the setup script.
-4. Run the scripts `src/FSFOODS.R` and `src/FSSTATUS_Analysis.R`.
-5. All interpretations are commented within the code.
-6. Compare the results with those in the `outputs/` directory to verify the accuracy of the predictions.
-
-## References
-
-1. U.S. Bureau of Labor Statistics, **Current Population Survey**: [https://www.bls.gov/cps/](https://www.bls.gov/cps/)
-2. IPUMS, **Current Population Survey (CPS)**: [https://cps.ipums.org/cps/](https://cps.ipums.org/cps/)
-3. U.S. Census Bureau, **American Community Survey (ACS)**: [https://www.census.gov/programs-surveys/acs/data.html](https://www.census.gov/programs-surveys/acs/data.html)
+4. Run and update the script `src/clean_data_code/new_data_clean.R` to create the new datasets to run the models.
+5. Run the scripts in `src/models` to see the models described above.
+6. Run the scripts in `src/visualization_code` to see some of the characteristics of the data. 
 
 ## Disclaimer
 
-This project was completed for STAT 172: Data Mining and General Linear Model at Drake University. We partnered with WesleyLife for this project, and all recommendations were tailored to their plans and needs.
+This project was completed for STAT 190: Case Studies in Data Analytics at Drake University. We partnered with DMARC for this project, and all recommendations were tailored to their plans and needs.
