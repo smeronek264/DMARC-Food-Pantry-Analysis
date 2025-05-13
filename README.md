@@ -1,1 +1,1 @@
-# DMARC-Food-Pantry-Analysis
+# DMARC Food Pantry Analysis
