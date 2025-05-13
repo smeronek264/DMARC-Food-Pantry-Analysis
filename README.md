@@ -50,7 +50,7 @@ At the start of each analysis script, we would choose the Y variable we were pre
 The repository contains the following key sections:
 
 - **scr**: Scripts for data analysis and model development.
- -**clean_data_code**
+ - **clean_data_code**
 - **data**: The datasets (CPS and ACS).
 - **outputs**: Visualizations and outputs of the analysis. Will also include an example of a code output with interpretations.
 
