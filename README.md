@@ -69,7 +69,8 @@ To run the code in this repository, you will need the following installed:
 ```r
 install.packages(c("tidyverse", "ggthemes", "logistf", "glmnet", "haven",
                    "knitr", "ggplot2", "RColorBrewer", "pROC", "lubridate",
-                   "sf", "dplyr", "tigris"))
+                   "sf", "dplyr", "tigris", "readxl", "readr", "MASS", "car", "randomForest",
+                    "data.table", "purr", "viridis", "scales"  ))
 ```
 
 ## Variables
@@ -101,7 +102,7 @@ The R script `src/models/lass_ridge_year.R` applies Lasso and Ridge regression w
 
 #### Negative Binomial
 
-The R script `src/models/neg_binom_model.R` models the number of pantry visits per household using Negative Binomial regression due to overdispersion in the data. It cleans the dataset, visualizes the distribution, and converts character columns to factors. After fitting the model, it checks for multicollinearity using VIF and removes correlated or insignificant variables. The final model identifies SNAP participation, household size, and poverty level as the most significant predictors of visit frequency.
+The R script `src/models/neg_binom_model.R` models the number of pantry visits per household using Negative Binomial regression due to overdispersion in the data. It cleans the dataset, visualizes the distribution, and converts character columns to factors. After fitting the model, it checks for multicollinearity using VIF and removes correlated or insignificant variables. 
 
 #### Time Series
 
@@ -122,11 +123,15 @@ To reproduce the results:
 
 ### Time Series
 
-When looking at the time series models we found that the total 
+When looking at the time series models we found that the total number of vistits has been increasing as time goes on which was expected. So we decided to look into the trends of different Zip codes and how time affects those counts. What we ended up finding is depending on the zip code, there could be an increasing number of vistors or a decreasing number. Notably, the ZIP code of 50301 was heavily utilized, which reflects on the fact that it is a P.O. Box and most likely the people using it are experienceing some form of homelessness. In addition, we found that 50315 also has an increase number of visitors. This could potential reflect the fact that the food pantry located in the 50315 Zipcode is also experienceing a 200% increase in vistors from 2023 to 2024. On the other hand we found that the zipcodes 50314 and 50317 are experinceing a decrease in the number of visitors.
 
 ### Common Characteristics of Visitors
 
+For the negative binomial model we found that SNAP participation, household size, and poverty level as the most significant predictors of visit frequency. Which made us interested in SNAP affects the number of vistors. We found that those who are on SNAP, saw a decrese in visits when they were not on SNAP. We also found that Food inflation seems to be correlated with the average number of visits. In addition, we found that the higher an income someone has the more likely they are to visit the food pantry.
+
 ### Red Barrel Conclusions
+
+Since we had found that there will be an increase in the number of visitors, we were interested in ways that DMARC could use donations through the Red Barrel program.  We ended up finding that HyVees in areas with increased commerce such as Windsors Heights, Mills Civic, and Urbandale had the most donations. In addition, the months during the end of the year also had an increased number of donations. This could point towards potential coloboration between DMARC and Hyvee to increase the number of donations.
 
 ## Disclaimer
 
