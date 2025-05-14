@@ -41,13 +41,11 @@ The data will be used to look into the trends of donations given to by the gener
 
 #### DMARC Survey
 
-For data preparation for the DMARC survey, we turned different demographics such as age, race, gender, and food stamps into binary terms (1 for true and 0 for false).
-
-Once we had created these binary variables, we needed to aggregate the individual data to the household level. This was done by grouping each household together and then taking the sum of all demographic attributes to determine how many of each category were in the household. For example, if 4 individuals had a 1 in the value for **CHILDREN**, then the household demographic would show 4 elderly individuals.
+The R scripts `src/clean_data_clean/original_data_cleaning.R` and `src/clean_data_clean/new_data_clean.R` reads raw CSV data, converts date columns to proper formats, and removes invalid birth years. It creates demographic indicators, aggregates data to household-visit and household-year levels, and calculates summary statistics like number of visits and average household composition. Finally, it exports two cleaned datasets as CSV files for easier reuse, allowing users to avoid rerunning the entire cleaning process. File paths must be updated manually before saving.
 
 #### Red Barrel
 
-For the Red Barrel Data, we wanted to look at the monatary value and how it changed based on location and time of the year. To do this, we decided to 
+For the Red Barrel Data, we wanted to look at the monatary value and how it changed based on location and time of the year. The CLEANRB file scripts reads all sheets from an Excel file, cleans dates and location names, combines the data, and selects and sorts relevant columns for analysis. This is done by the year.
 
 ## Repository Structure
 
@@ -76,32 +74,38 @@ install.packages(c("tidyverse", "ggthemes", "logistf", "glmnet", "haven",
 
 ## Variables
 
-Below is a list of predictor (X) variables used to predict the outcome (Y) variables.
+During our exploration, we wanted to look into predicting the trend of visitors per month, the characteristics that impacted the number of visits per household, and the different variables that could lead to more donations in Red Barrel.
 
-### Predictor Variables (X)
-- **hhsize**: The number of people in a household.
-- **female**: The number of females in a household.
-- **hispanic**: The number of Hispanics in a household.
-- **black**: The number of Black individuals in a household.
-- **kids**: The number of children (under 18) in a household.
-- **elderly**: The number of seniors (over 60) in a household.
-- **education**: The number of people with a college degree in a household.
-- **married**: The number of married individuals in a household.
+In order to look into each of the questions, we used different variables to predict.
 
-### Outcome Variables (Y)
-- **FSFOODS**: The household lacks enough food and/or variety.
-- **FSSTATUS**: The household lacks food security.
+For the negative binomial model, and the lasso and ridge regression we looked into how different characterisitcs on the household level affected the number of visitors.
+
+For the time series, we looked into how time affected the number of visitors while also taking into account how COVID could have affected the outcome. In order to reflect the COVID impact, we utilized a dummy boolean variable to show when COVID was.
+
+For SNAP, we looked into how visits change when a person is on SNAP and when they were not on SNAP.
 
 ## Methods
 
 The analysis follows these steps:
 
 1. **Data Cleaning and Preprocessing**: Preparing the data for analysis.
-2. **Model Training**: Training a predictive model using the CPS data.
-3. **Model Application**: Applying the model to ACS data to predict food insecurity in Iowa.
-4. **Aggregation**: Aggregating household-level predictions to the PUMA level.
+2. **Data Explorations**: Looking for noticable trends between varaibles.
+3. **Model Training**: Train the different models that we were using.
+4. **Potential Conclusions**: Look at the major takeways we have with each model.
 
-The model is trained using the CPS data and tested for accuracy. For each outcome variable (Y), two Bernoulli models are trained with a logit link function using Lasso (where unimportant variables have coefficients set to zero) and Ridge (where unimportant variables have coefficients close to zero). Since food insecurity is a binary outcome (insecurity exists or not), the logit link ensures the output remains between 0 and 1. The models are evaluated using testing data, and the one with the highest Area Under the Curve (AUC) on a ROC plot is selected as the best model. Finally, the best model is used to predict food insecurity in the ACS data, and weighted means are calculated for each PUMA to identify regions with the highest probabilities of food insecurity.
+### Models Used
+
+#### Lasso and Ridge 
+
+The R script `src/models/lass_ridge_year.R` applies Lasso and Ridge regression with a Poisson model to predict household visit counts using demographic and socioeconomic data. After cleaning and splitting the data, it fits models using cross-validation to find optimal parameters. Predictions are evaluated with RMSE, MAE, and residual plots. Despite the analysis, the models performed poorly, indicating weak predictive power and limited significance of the included variables in forecasting the number of visits. Also this model overall could the wrong model to used, so we ended up trying a negative binomial.
+
+#### Negative Binomial
+
+The R script `src/models/neg_binom_model.R` models the number of pantry visits per household using Negative Binomial regression due to overdispersion in the data. It cleans the dataset, visualizes the distribution, and converts character columns to factors. After fitting the model, it checks for multicollinearity using VIF and removes correlated or insignificant variables. The final model identifies SNAP participation, household size, and poverty level as the most significant predictors of visit frequency.
+
+#### Time Series
+
+The R script `src/models/STAT_190_Time_Series_by_ZIP_Dummy.R` builds time series models to predict monthly food pantry visits by ZIP code. It preprocesses client-level data, aggregates visit counts, and adds a COVID-period dummy variable. Linear models are fitted for each ZIP to analyze trends and forecast future visits. Top ZIP codes are identified, and actual vs. predicted visits are visualized. Growth rates are extracted by ZIP to compare trends, showing how visit frequency changed over time, including during COVID-19.
 
 ## Code Execution
 
@@ -112,7 +116,17 @@ To reproduce the results:
 3. Install the required packages by running the setup script.
 4. Run and update the script `src/clean_data_code/new_data_clean.R` to create the new datasets to run the models.
 5. Run the scripts in `src/models` to see the models described above.
-6. Run the scripts in `src/visualization_code` to see some of the characteristics of the data. 
+6. Run the scripts in `src/visualization_code` to see some of the characteristics of the data.
+
+## Results
+
+### Time Series
+
+When looking at the time series models we found that the total 
+
+### Common Characteristics of Visitors
+
+### Red Barrel Conclusions
 
 ## Disclaimer
 
