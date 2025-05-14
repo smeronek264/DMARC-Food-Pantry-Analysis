@@ -1,6 +1,6 @@
 # Analyzing DMARC Food Pantry Visitiations
 
-**Authors**: Nolan Henze, Sophie Merone, Nathan Oelsner, and Eric Pfaffenbach  
+**Authors**: Nolan Henze, Sophie Meronek, Nathan Oelsner, and Eric Pfaffenbach  
 **Date**: 5/13/2025
 
 **Disclaimer**: Some of the code was made using CHATGPT, however, we also wrote a majority of the code.
@@ -9,7 +9,7 @@
 
 This repository contains the code and data required for our Capston Project for analyzing the visitors of the DMARC Food Pantry.
 
-The goal of this project was to access the growing need for the food pantries in the DMARC system. Our main goal was to predict the trend of visitors and to characterize the people who are using the food pantries. We collaborated with **DMARC Food Pantries**, an organization that runs a network of food pantries to help provide those in need with food and other essentials. 
+The goal of this project was to access the growing need for the food pantries in the DMARC system. Our main goal was to predict the trend of visitors and to characterize the people who are using the food pantries. We collaborated with **DMARC Food Pantries**, an organization that runs a network of food pantries to help provide those in need with food and other essentials. We also wanted to look into potential ways that DMARC could better support their visitors by highlighting locations that 
 
 The recommendations will be geared towards DMARC and specifically towards different locations of their food pantries.
 
@@ -39,9 +39,15 @@ The data will be used to look into the trends of donations given to by the gener
 
 ### Data Preparation
 
+#### DMARC Survey
+
 For data preparation for the DMARC survey, we turned different demographics such as age, race, gender, and food stamps into binary terms (1 for true and 0 for false).
 
 Once we had created these binary variables, we needed to aggregate the individual data to the household level. This was done by grouping each household together and then taking the sum of all demographic attributes to determine how many of each category were in the household. For example, if 4 individuals had a 1 in the value for **CHILDREN**, then the household demographic would show 4 elderly individuals.
+
+#### Red Barrel
+
+For the Red Barrel Data, we wanted to look at the monatary value and how it changed based on location and time of the year. To do this, we decided to 
 
 ## Repository Structure
 
