@@ -1,7 +1,8 @@
 # Analyzing DMARC Food Pantry Visitiations
 
 **Authors**: Nolan Henze, Sophie Merone, Nathan Oelsner, and Eric Pfaffenbach  
-**Date**: 5/13/2025 \n
+**Date**: 5/13/2025
+
 **Disclaimer**: Some of the code was made using CHATGPT, however, we also wrote a majority of the code.
 
 ## Introduction
