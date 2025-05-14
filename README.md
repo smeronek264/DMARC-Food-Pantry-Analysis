@@ -45,11 +45,11 @@ For the Red Barrel Data, we wanted to look at the monetary value and how it chan
 The repository contains the following key sections:
 
 - `src`: Scripts for data analysis and model development.
-- `clean_data_code`: The scripts for cleaning the data.
-- `models`: The models that were created to analyze the data.
-- `visualization_code`: The scripts to show different aspects of the data visually.
+    - `clean_data_code`: The scripts for cleaning the data.
+    - `models`: The models that were created to analyze the data.
+    - `visualization_code`: The scripts to show different aspects of the data visually.
 - `data`: The original datasets and new aggregated datasets.
-- `raw_data`: The original data given to us.
+    - `raw_data`: The original data given to us.
 - `outputs`: A few of the visualizations we ended up making.
 
 ## Requirements
