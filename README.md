@@ -4,7 +4,7 @@
 **Date:** 5/13/2025  
 
 ### Disclaimer:
-Some of the code was made using ChatGPT, however, we also wrote a majority of the code ourselves.
+Some of the code was made using ChatGPT, however, we also wrote a majority of the code ourselves. We also used CHATGPT to help us put together a concise README file, but it was primarily written by us.
 
 ## Introduction
 This repository contains the code and data required for our Capstone Project for analyzing the visitors of the DMARC Food Pantry.
